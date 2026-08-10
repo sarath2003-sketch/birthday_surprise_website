@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Surprise ✨</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#08051a;color:#fff;overflow-x:hidden}
+body{background:radial-gradient(circle at 50% 20%,#40206b 0,#150c31 38%,#05030d 100%);min-height:100vh}
+button{font:inherit}.screen{min-height:100vh;display:none;position:relative;overflow:hidden}.screen.active{display:flex}
+.center{align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:24px}
+canvas#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.content{position:relative;z-index:2;max-width:950px;width:100%}
+.glass{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);box-shadow:0 20px 70px rgba(0,0,0,.4);backdrop-filter:blur(16px);border-radius:28px;padding:28px}
+h1{font-size:clamp(2.2rem,7vw,5.5rem);margin:8px 0;background:linear-gradient(90deg,#fff,#ffd1ed,#b9d9ff,#fff);-webkit-background-clip:text;color:transparent;animation:shine 4s linear infinite;background-size:300%}
+h2{font-size:clamp(1.7rem,4vw,3rem)}p{line-height:1.7;color:#eee}
+@keyframes shine{to{background-position:300%}}@keyframes float{50%{transform:translateY(-14px) rotate(2deg)}}@keyframes pulse{50%{transform:scale(1.12)}}@keyframes pop{0%{transform:scale(.2);opacity:0}70%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+.heart3d{font-size:105px;filter:drop-shadow(0 0 18px #ff4fb5) drop-shadow(0 0 50px #8d5cff);animation:float 3s ease-in-out infinite;transform:rotate(-8deg);text-shadow:20px 20px 0 rgba(120,50,200,.25)}
+.btn{border:0;border-radius:999px;padding:14px 25px;margin:8px;background:linear-gradient(135deg,#ff4fa3,#775cff);color:white;font-weight:800;cursor:pointer;box-shadow:0 12px 35px rgba(255,79,163,.3);transition:.25s}
+.btn:hover{transform:translateY(-3px) scale(1.03)}.arrow{font-size:48px;animation:pulse 1.2s infinite;cursor:pointer}
+.corner-heart{position:absolute;right:24px;top:20px;font-size:54px;z-index:3;animation:pulse 1.5s infinite;filter:drop-shadow(0 0 15px #ff4fa3)}
+.arrow-shot{position:absolute;left:50%;bottom:85px;font-size:54px;transform:translateX(-50%);z-index:4;cursor:pointer;animation:float 1.4s infinite}
+.heart-target{position:absolute;right:30px;top:30px;font-size:70px;z-index:2}
+.explosion{position:fixed;inset:0;display:none;z-index:20;pointer-events:none}.explosion.show{display:block}
+.boom{position:absolute;left:50%;top:15%;transform:translate(-50%,-50%);font-size:130px;animation:pop .7s forwards}
+.particle{position:absolute;left:50%;top:15%;font-size:25px;animation:burst 1.2s ease-out forwards}
+@keyframes burst{to{transform:translate(var(--x),var(--y)) rotate(720deg);opacity:0}}
+.wish{font-size:clamp(1.3rem,3vw,2rem);min-height:70px}
+.photo-wrap{position:relative;width:min(330px,78vw);height:min(420px,72vh);margin:18px auto;perspective:900px}
+.photo{width:100%;height:100%;object-fit:cover;border-radius:24px;border:2px solid rgba(255,255,255,.5);box-shadow:0 0 25px #ff66c4,0 0 80px rgba(120,92,255,.7);animation:photoIn 1.1s ease both}
+@keyframes photoIn{0%{opacity:0;transform:rotateY(-180deg) scale(.5)}100%{opacity:1;transform:rotateY(0) scale(1)}}
+.photo-caption{font-weight:800;margin-top:10px}
+.gift{font-size:130px;cursor:pointer;animation:float 2.5s infinite;filter:drop-shadow(0 0 25px #ff66c4)}
+.choice-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:20px 0}.choice{padding:15px;border:1px solid #ffffff33;border-radius:18px;background:#ffffff0d;cursor:pointer}.choice.selected{background:#ff4fa344;border-color:#ff8bcb;box-shadow:0 0 20px #ff4fa355}
+.orbit{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin:20px}.mini{width:78px;height:78px;border-radius:50%;object-fit:cover;border:2px solid #fff;animation:orbit 4s linear infinite}
+@keyframes orbit{to{transform:rotate(360deg) translateX(10px) rotate(-360deg)}}
+.hidden{display:none!important}.sparkle{position:absolute;animation:float 2s infinite;opacity:.8}
+.footer{margin-top:20px;font-size:.85rem;color:#bbb}
+#photoStage{min-height:100vh}.memory-card{display:none}.memory-card.active{display:block;animation:pop .8s}.photo-controls{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+
+<section id="s1" class="screen active center">
+  <div class="content">
+    <div class="corner-heart">💗</div>
+    <div class="heart3d">❤️</div>
+    <h1>A Little Birthday Surprise ✨</h1>
+    <p>There is something special waiting for you.<br>Tap the arrow and let the surprise begin.</p>
+    <div class="arrow" onclick="shootHeart()">⬇️</div>
+  </div>
+</section>
+
+<section id="s2" class="screen center">
+  <div class="content">
+    <div class="glass">
+      <div style="font-size:90px">💥❤️</div>
+      <h1>Surprise!</h1>
+      <p id="typeWish" class="wish"></p>
+      <button class="btn" onclick="show('s3')">Open your birthday message ✨</button>
+    </div>
+  </div>
+</section>
+
+<section id="s3" class="screen center">
+  <div class="content glass">
+    <h2>✨ A tiny birthday wish ✨</h2>
+    <p>Happy Birthday! 🎂<br>
+    May your days be filled with peaceful moments, genuine smiles, good friends,
+    beautiful memories and lots of reasons to be happy.</p>
+    <p>Keep being the wonderful person you are. 🌷</p>
+    <button class="btn" onclick="show('s4')">Next →</button>
+  </div>
+</section>
+
+<section id="s4" class="screen center">
+  <div class="content glass">
+    <h2>💫 Pick the things you love</h2>
+    <p>Tap a few favourites — the page will create a little celebration from your choices.</p>
+    <div class="choice-grid">
+      <div class="choice" onclick="toggle(this)">🎶 Music</div>
+      <div class="choice" onclick="toggle(this)">🌸 Flowers</div>
+      <div class="choice" onclick="toggle(this)">🍫 Chocolate</div>
+      <div class="choice" onclick="toggle(this)">🌅 Sunsets</div>
+      <div class="choice" onclick="toggle(this)">📸 Photos</div>
+      <div class="choice" onclick="toggle(this)">✨ Cute surprises</div>
+      <div class="choice" onclick="toggle(this)">🎬 Movies</div>
+      <div class="choice" onclick="toggle(this)">☕ Favourite snacks</div>
+    </div>
+    <button class="btn" onclick="show('s5')">Continue 🎁</button>
+  </div>
+</section>
+
+<section id="s5" class="screen center">
+  <div class="content">
+    <div class="glass">
+      <h2>🎁 One more thing...</h2>
+      <p>There is a gift waiting for you.</p>
+      <div class="gift" onclick="openGift()">🎁</div>
+      <p>Tap the gift</p>
+    </div>
+  </div>
+</section>
+
+<section id="s6" class="screen center" id="photoStage">
+  <div class="content">
+    <div class="glass">
+      <h2>📸 Your Memory Gallery</h2>
+      <p id="memoryText">Every picture gets its own little moment ✨</p>
+      <div class="photo-wrap">
+        <img id="mainPhoto" class="photo" src="assets/photo1.jpg" alt="Birthday memory">
+      </div>
+      <div class="photo-caption" id="caption">Memory 1 💗</div>
+      <div class="photo-controls">
+        <button class="btn" onclick="prevPhoto()">← Previous</button>
+        <button class="btn" onclick="nextPhoto()">Next →</button>
+      </div>
+      <div class="orbit" id="orbit"></div>
+    </div>
+  </div>
+</section>
+
+<section id="s7" class="screen center">
+  <div class="content glass">
+    <div style="font-size:80px">🎂✨💐</div>
+    <h1>Happy Birthday! 🎉</h1>
+    <h2>To someone truly special 💗</h2>
+    <p id="finalWish"></p>
+    <p>May this new year of your life bring you more laughter, more confidence,
+    more beautiful memories and many happy surprises.</p>
+    <button class="btn" onclick="replay()">Replay the surprise ↺</button>
+    <div class="footer">Made with ✨ and lots of birthday wishes.</div>
+  </div>
+</section>
+
+<div class="explosion" id="explosion"><div class="boom">💥</div></div>
+
+<script>
+const screens=[...document.querySelectorAll('.screen')];
+function show(id){screens.forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0)}
+function shootHeart(){
+  const e=document.getElementById('explosion');e.classList.add('show');
+  setTimeout(()=>{e.classList.remove('show');show('s2');typeText('typeWish','💖 Happy Birthday! Wishing you a day full of smiles, surprises and beautiful memories. 💖',35)},700);
+}
+function typeText(id,text,speed){const el=document.getElementById(id);el.textContent='';let i=0;const t=setInterval(()=>{el.textContent+=text[i++];if(i>=text.length)clearInterval(t)},speed)}
+function toggle(el){el.classList.toggle('selected')}
+function openGift(){show('s6');startGallery()}
+const photos=[
+ ['assets/photo1.jpg','Memory 1 💗'],
+ ['assets/photo2.jpg','Memory 2 ✨'],
+ ['assets/photo3.jpg','Memory 3 🌸'],
+ ['assets/photo4.jpg','Memory 4 🎂'],
+ ['assets/photo5.jpg','Memory 5 💫']
+];
+let idx=0,timer;
+function renderPhoto(){
+ const img=document.getElementById('mainPhoto');img.style.animation='none';void img.offsetWidth;img.style.animation='photoIn 1.1s ease both';
+ img.src=photos[idx][0];document.getElementById('caption').textContent=photos[idx][1];
+}
+function nextPhoto(){idx=(idx+1)%photos.length;renderPhoto()}
+function prevPhoto(){idx=(idx-1+photos.length)%photos.length;renderPhoto()}
+function startGallery(){clearInterval(timer);idx=0;renderPhoto();timer=setInterval(nextPhoto,3500);const orbit=document.getElementById('orbit');orbit.innerHTML='';photos.forEach(p=>{const im=document.createElement('img');im.src=p[0];im.className='mini';im.onerror=()=>im.style.display='none';orbit.appendChild(im)})}
+function replay(){clearInterval(timer);show('s1')}
+document.getElementById('finalWish').textContent='May your birthday be as bright, joyful and unforgettable as the memories you create. 🌟';
+
+// Starfield
+const c=document.getElementById('stars'),x=c.getContext('2d');let stars=[];
+function resize(){c.width=innerWidth*devicePixelRatio;c.height=innerHeight*devicePixelRatio;x.scale(devicePixelRatio,devicePixelRatio);stars=Array.from({length:100},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.8+.3,s:Math.random()*.5+.1}))}
+function draw(){x.clearRect(0,0,innerWidth,innerHeight);x.fillStyle='rgba(255,255,255,.8)';stars.forEach(a=>{x.beginPath();x.arc(a.x,a.y,a.r,0,Math.PI*2);x.fill();a.y+=a.s;if(a.y>innerHeight)a.y=0});requestAnimationFrame(draw)}
+addEventListener('resize',resize);resize();draw();
+</script>
+</body>
+</html>

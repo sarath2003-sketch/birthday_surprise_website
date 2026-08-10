@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Little Birthday Surprise ✨ | Happy Birthday!</title>
+  <meta name="description"
+    content="A special 3D interactive birthday surprise website filled with glowing lights, memories, music, and sweet wishes.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Outfit:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- CSS Styles -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+
+<body>
+
+  <!-- Background 3D Canvases -->
+  <canvas id="bg-canvas"></canvas>
+  <canvas id="fireworks-canvas"></canvas>
+
+  <!-- Ambient Cinematic Layers: Glow, Lens Flare, Stars, Petals -->
+  <div class="ambient-glow" id="ambient-glow"></div>
+  <div class="lens-flare" id="lens-flare"></div>
+  <div class="stars-overlay"></div>
+  <div class="petals-container" id="petals-container"></div>
+
+  <!-- Audio Player Floating Button with Equalizer -->
+  <button id="music-toggle" class="music-btn" aria-label="Toggle Birthday Music">
+    <span class="music-icon">🎵</span>
+    <span class="music-text">Music</span>
+    <div class="equalizer" id="equalizer">
+      <span class="eq-bar"></span>
+      <span class="eq-bar"></span>
+      <span class="eq-bar"></span>
+      <span class="eq-bar"></span>
+    </div>
+  </button>
+
+  <!-- Audio Element with Multiple Fallback Sources -->
+  <audio id="audio-player" preload="auto" loop>
+    <source src="assets/birthday-song.webm" type="audio/webm">
+    <source src="assets/birthday-song.mp3" type="audio/mpeg">
+    <source src="assets/music.mp3" type="audio/mpeg">
+    <source src="assets/song.mp3" type="audio/mpeg">
+    <source src="assets/bg-music.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Main Container -->
+  <main class="app-container">
+
+    <!-- ================= SCREEN 1: OPENING SCREEN ================= -->
+    <section class="screen active" id="screen-1">
+      <div class="screen-content center-align">
+
+        <!-- 3D Heart Container -->
+        <div class="heart-stage" id="heart-stage">
+          <div class="glowing-3d-heart" id="glowing-heart">
+            <svg viewBox="0 0 100 100" class="heart-svg">
+              <defs>
+                <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ff416c" />
+                  <stop offset="50%" stop-color="#ff2a85" />
+                  <stop offset="100%" stop-color="#8a2387" />
+                </linearGradient>
+                <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="6" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+              <path d="M 50,30 A 20,20 0 0,0 20,50 C 20,70 50,90 50,90 C 50,90 80,70 80,50 A 20,20 0 0,0 50,30 Z"
+                fill="url(#heartGradient)" filter="url(#neonGlow)" />
+            </svg>
+            <div class="heart-aura"></div>
+          </div>
+        </div>
+
+        <h1 class="sparkle-title text-glow">A Little Birthday Surprise ✨</h1>
+        <p class="subtitle fade-in-delay">There is something special waiting for you...</p>
+
+        <!-- Flying Arrow Container & Button -->
+        <div class="arrow-trigger-wrapper">
+          <div class="flying-arrow" id="flying-arrow">🏹 ➔</div>
+          <button class="btn btn-primary pulse-btn" id="start-btn">
+            <span>Tap to Unlock ✨</span>
+            <div class="down-arrow-icon">↓</div>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SCREEN 2: BIRTHDAY SURPRISE TYPING ================= -->
+    <section class="screen" id="screen-2">
+      <div class="screen-content center-align">
+        <div class="glass-card surprise-box">
+          <div class="card-badge">✨ Special Day ✨</div>
+          <div class="typing-container">
+            <p id="typing-text" class="typing-text"></p>
+            <span class="cursor">|</span>
+          </div>
+          <button class="btn btn-glow mt-2" id="to-wish-btn" style="display: none;">
+            <span>Open Your Birthday Message ✨</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SCREEN 3: BIRTHDAY MESSAGE ================= -->
+    <section class="screen" id="screen-3">
+      <div class="screen-content">
+        <div class="glass-card wish-card">
+          <div class="card-header">
+            <span class="sparkle-icon">✨</span>
+            <h2>A Little Birthday Wish</h2>
+            <span class="sparkle-icon">✨</span>
+          </div>
+
+          <div class="wish-body">
+            <p class="wish-lead">To a truly special person who brings warmth and happiness to everyone around...</p>
+
+            <div class="wish-grid">
+              <div class="wish-chip">💖 Endless Happiness</div>
+              <div class="wish-chip">🌸 Beautiful Memories</div>
+              <div class="wish-chip">⭐ Great Success</div>
+              <div class="wish-chip">🕊️ Inner Peace</div>
+              <div class="wish-chip">😊 Brightest Smiles</div>
+              <div class="wish-chip">✨ Magic Moments</div>
+              <div class="wish-chip">🤗 Good Friends</div>
+              <div class="wish-chip">🎉 Wonderful Year Ahead</div>
+            </div>
+
+            <div class="tamil-poem-box">
+              <p class="tamil-text">இனிய பிறந்தநாள் வாழ்த்துகள்! 🌸</p>
+              <p class="tanglish-text">Un vaazhvil ellaam vaazhthum nalamum sera en manamaarntha vaazthukkal! ✨</p>
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-full mt-2" id="to-favs-btn">
+            <span>Next →</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SCREEN 4: FAVOURITE THINGS ================= -->
+    <section class="screen" id="screen-4">
+      <div class="screen-content">
+        <div class="section-title-wrap">
+          <h2 class="title-gradient">💫 Pick Your Favourites</h2>
+          <p class="section-sub">Select the things that bring a smile to your face!</p>
+        </div>
+
+        <div class="favourites-grid" id="favs-grid">
+          <div class="fav-card" data-item="Music">
+            <span class="fav-icon">🎶</span>
+            <span class="fav-label">Music</span>
+            <div class="check-mark">✓</div>
+          </div>
+          <div class="fav-card" data-item="Flowers">
+            <span class="fav-icon">🌸</span>
+            <span class="fav-label">Flowers</span>
+            <div class="check-mark">✓</div>
+          </div>
+          <div class="fav-card" data-item="Chocolate">
+            <span class="fav-icon">🍫</span>
+            <span class="fav-label">Chocolate</span>
+            <div class="check-mark">✓</div>
+          </div>
+          <div class="fav-card" data-item="Sunsets">
+            <span class="fav-icon">🌅</span>
+            <span class="fav-label">Sunsets</span>
+            <div class="check-mark">✓</div>
+          </div>
+          <div class="fav-card" data-item="Photos">
+            <span class="fav-icon">📸</span>
+            <span class="fav-label">Photos</span>
+            <div class="check-mark">✓</div>
+          </div>
+          <div class="fav-card" data-item="Cute Surprises">
+            <span class="fav-icon">✨</span>
+            <span class="fav-label">Cute Surprises</span>
+            <div class="check-mark">✓</div>
+          </div>
+          <div class="fav-card" data-item="Movies">
+            <span class="fav-icon">🎬</span>
+            <span class="fav-label">Movies</span>
+            <div class="check-mark">✓</div>
+          </div>
+          <div class="fav-card" data-item="Favourite Snacks">
+            <span class="fav-icon">☕</span>
+            <span class="fav-label">Favourite Snacks</span>
+            <div class="check-mark">✓</div>
+          </div>
+          <div class="fav-card" data-item="Night Sky">
+            <span class="fav-icon">🌙</span>
+            <span class="fav-label">Night Sky</span>
+            <div class="check-mark">✓</div>
+          </div>
+          <div class="fav-card" data-item="Bouquet">
+            <span class="fav-icon">💐</span>
+            <span class="fav-label">Bouquet</span>
+            <div class="check-mark">✓</div>
+          </div>
+          <div class="fav-card" data-item="Art">
+            <span class="fav-icon">🎨</span>
+            <span class="fav-label">Art</span>
+            <div class="check-mark">✓</div>
+          </div>
+          <div class="fav-card" data-item="Cute Things">
+            <span class="fav-icon">🧸</span>
+            <span class="fav-label">Cute Things</span>
+            <div class="check-mark">✓</div>
+          </div>
+        </div>
+
+        <button class="btn btn-glow btn-full mt-3" id="to-gift-btn">
+          <span>Continue 🎁</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ================= SCREEN 5: 3D GIFT BOX SECTION ================= -->
+    <section class="screen" id="screen-5">
+      <div class="screen-content center-align">
+        <h2 class="title-gradient">🎁 One More Surprise...</h2>
+        <p class="section-sub">Tap the glowing gift box to unwrap your special present!</p>
+
+        <!-- 3D Gift Box Stage -->
+        <div class="gift-container" id="gift-box-trigger">
+          <div class="gift-glow-aura"></div>
+
+          <div class="gift-box 3d-object" id="gift-box">
+            <div class="gift-lid" id="gift-lid">
+              <div class="gift-bow">
+                <div class="bow-left"></div>
+                <div class="bow-right"></div>
+                <div class="bow-center"></div>
+              </div>
+            </div>
+            <div class="gift-body">
+              <div class="gift-ribbon-v"></div>
+              <div class="gift-ribbon-h"></div>
+            </div>
+            <!-- Burst photo container inside box -->
+            <div class="emerging-photo-wrap" id="emerging-photo-wrap">
+              <img src="" id="emerging-photo" alt="Emerging Surprise Photo" />
+            </div>
+          </div>
+
+          <p class="tap-hint pulse-text">✨ Tap Box to Open ✨</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= PHOTO STYLE 1: TOP-DOWN REVEAL ================= -->
+    <section class="screen" id="screen-6a">
+      <div class="screen-content center-align">
+        <div class="section-title-wrap">
+          <div class="spotlight"></div>
+          <h2 class="title-gradient">✨ Falling Memories</h2>
+          <p class="section-sub">Photos drifting through ambient light...</p>
+        </div>
+
+        <!-- Top-Down Falling Stage -->
+        <div class="topdown-stage" id="topdown-stage">
+          <!-- Dynamically populated falling photo cards -->
+        </div>
+
+        <button class="btn btn-primary mt-3" id="to-style2-btn">
+          <span>Next Style: 3D Perspective →</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ================= PHOTO STYLE 2: 3 LARGE PHOTOS (3D PERSPECTIVE) ================= -->
+    <section class="screen" id="screen-6b">
+      <div class="screen-content center-align">
+        <div class="section-title-wrap">
+          <h2 class="title-gradient">📸 3D Perspective View</h2>
+          <p class="section-sub">Swipe or tap Next to rotate photos</p>
+        </div>
+
+        <!-- 3 Large Photos Stage -->
+        <div class="perspective-stage" id="perspective-stage">
+          <div class="perspective-card photo-left" id="p-card-left">
+            <img src="" id="p-img-left" alt="Memory Left" />
+          </div>
+          <div class="perspective-card photo-center" id="p-card-center">
+            <div class="center-glow-ring"></div>
+            <img src="" id="p-img-center" alt="Memory Center" />
+            <div class="photo-caption" id="p-caption-center">Memory</div>
+          </div>
+          <div class="perspective-card photo-right" id="p-card-right">
+            <img src="" id="p-img-right" alt="Memory Right" />
+          </div>
+        </div>
+
+        <div class="gallery-controls mt-2">
+          <button class="btn btn-secondary" id="p-prev-btn">
+            <span>← Previous</span>
+          </button>
+          <button class="btn btn-secondary" id="p-next-btn">
+            <span>Next →</span>
+          </button>
+        </div>
+
+        <button class="btn btn-glow mt-3" id="to-style3-btn">
+          <span>Next Style: Card Slider →</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ================= PHOTO STYLE 3: SIDE CARD SLIDER ================= -->
+    <section class="screen" id="screen-6c">
+      <div class="screen-content center-align">
+        <div class="section-title-wrap">
+          <h2 class="title-gradient">💫 Glass Card Slider</h2>
+          <p class="section-sub">Glassmorphism card slide with neon trails</p>
+        </div>
+
+        <!-- Slider Stage -->
+        <div class="slider-stage" id="slider-stage">
+          <div class="light-flash" id="slider-light-flash"></div>
+          <div class="arrow-trail" id="slider-arrow-trail">➔</div>
+
+          <div class="slider-card glass-card" id="slider-card">
+            <div class="slider-img-wrap">
+              <img src="" id="slider-img" alt="Slider Photo" />
+              <div class="slider-reflections"></div>
+            </div>
+            <p class="slider-caption" id="slider-caption">Memory</p>
+          </div>
+        </div>
+
+        <div class="gallery-controls mt-2">
+          <button class="btn btn-secondary" id="slider-prev-btn">
+            <span>← Previous</span>
+          </button>
+          <button class="btn btn-secondary" id="slider-next-btn">
+            <span>NEXT →</span>
+          </button>
+        </div>
+
+        <button class="btn btn-primary mt-3" id="to-style4-btn">
+          <span>Next Style: 3D Orbit →</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ================= PHOTO STYLE 4: 3D ORBIT CAROUSEL ================= -->
+    <section class="screen" id="screen-6d">
+      <div class="screen-content center-align">
+        <div class="section-title-wrap">
+          <h2 class="title-gradient">🪐 3D Orbit Carousel</h2>
+          <p class="section-sub">Memories revolving around the active photo</p>
+        </div>
+
+        <!-- 3D Orbit Stage -->
+        <div class="orbit-stage">
+          <div class="orbit-track" id="orbit-track">
+            <!-- Dynamically populated orbit items -->
+          </div>
+
+          <div class="orbit-center-frame" id="orbit-center-frame">
+            <div class="orbit-glow-burst"></div>
+            <img src="" id="orbit-center-img" alt="Active Orbit Photo" />
+            <p class="photo-caption" id="orbit-center-caption">Memory</p>
+          </div>
+        </div>
+
+        <div class="gallery-controls mt-2">
+          <button class="btn btn-secondary" id="orbit-prev-btn">
+            <span>← Previous</span>
+          </button>
+          <button class="btn btn-secondary" id="orbit-next-btn">
+            <span>Next →</span>
+          </button>
+        </div>
+
+        <button class="btn btn-glow mt-3" id="to-style5-btn">
+          <span>Next Style: Photo Wall →</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ================= PHOTO STYLE 5: STAGGERED PHOTO WALL ================= -->
+    <section class="screen" id="screen-6e">
+      <div class="screen-content">
+        <div class="section-title-wrap text-center">
+          <h2 class="title-gradient">📸 Beautiful Photo Wall</h2>
+          <p class="section-sub">Tap any photo to view in full screen ✨</p>
+        </div>
+
+        <!-- Staggered Grid Wall -->
+        <div class="photo-wall-grid" id="photo-wall-grid">
+          <!-- Dynamically populated grid cards -->
+        </div>
+
+        <div class="text-center mt-3">
+          <button class="btn btn-primary" id="to-note-btn">
+            <span>A Little Note For You 🌷</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SCREEN 7: PERSONAL NOTE ================= -->
+    <section class="screen" id="screen-7">
+      <div class="screen-content center-align">
+        <div class="glass-card note-card">
+          <div class="card-header">
+            <span class="sparkle-icon">🌷</span>
+            <h2>A Little Note For You</h2>
+            <span class="sparkle-icon">🌷</span>
+          </div>
+
+          <div class="note-typing-box">
+            <p id="note-typing-text" class="note-typing-text"></p>
+            <span class="cursor" id="note-cursor">|</span>
+          </div>
+
+          <button class="btn btn-glow mt-3" id="to-surprise-btn" style="display: none;">
+            <span>✨ One Tiny Surprise</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SCREEN 7B: TINY SURPRISE ================= -->
+    <section class="screen" id="screen-7b">
+      <div class="screen-content center-align">
+        <div class="section-title-wrap">
+          <h2 class="title-gradient">✨ One Tiny Surprise</h2>
+          <p class="section-sub">Tap each card to reveal a special wish!</p>
+        </div>
+
+        <div class="tiny-surprises-grid" id="tiny-surprises-grid">
+          <div class="tiny-card glass-card" data-wish="May your days be filled with warm smiles and infinite joy! 😊">
+            <div class="tiny-icon">💫</div>
+            <h4>More Smiles</h4>
+            <p class="tiny-hidden-msg">Tap to reveal ✨</p>
+          </div>
+
+          <div class="tiny-card glass-card" data-wish="May every moment create a memory you treasure forever! 🌸">
+            <div class="tiny-icon">🌷</div>
+            <h4>Beautiful Memories</h4>
+            <p class="tiny-hidden-msg">Tap to reveal ✨</p>
+          </div>
+
+          <div class="tiny-card glass-card" data-wish="May your journey ahead be blessed with happiness and peace! 🎂">
+            <div class="tiny-icon">🎂</div>
+            <h4>Happy Moments</h4>
+            <p class="tiny-hidden-msg">Tap to reveal ✨</p>
+          </div>
+        </div>
+
+        <button class="btn btn-primary mt-3" id="to-final-btn">
+          <span>Grand Celebration 🎉</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ================= SCREEN 8: FINAL BIRTHDAY SCREEN ================= -->
+    <section class="screen" id="screen-8">
+      <div class="screen-content center-align">
+
+        <div class="floating-emojis-bg" id="floating-emojis">
+          <span>🎂</span><span>💐</span><span>✨</span><span>💗</span><span>🎉</span><span>🎁</span><span>🌸</span><span>⭐</span>
+        </div>
+
+        <div class="glass-card celebration-card">
+          <div class="birthday-cake-icon">🎂</div>
+          <h1 class="grand-title text-glow">HAPPY BIRTHDAY! 🎉</h1>
+          <h3 class="grand-subtitle">To Someone Truly Special 💗</h3>
+
+          <div class="heartfelt-message">
+            <p>Some people become special not because of how long we have known them, but because of the happiness,
+              comfort and beautiful memories they bring into our lives.</p>
+            <p>On your birthday, I simply wish that your days ahead are filled with peaceful moments, genuine smiles,
+              good people and countless reasons to be happy.</p>
+            <p class="highlight-quote">Keep shining in your own way.<br>Keep smiling.<br>And may this year bring you
+              many beautiful memories that stay close to your heart. ✨</p>
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn btn-primary" id="replay-btn">
+              <span>↻ Experience the Surprise Again</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Photo Lightbox Modal -->
+  <div class="lightbox-modal" id="lightbox-modal">
+    <span class="lightbox-close" id="lightbox-close">&times;</span>
+    <div class="lightbox-content-wrap">
+      <img src="" id="lightbox-img" alt="Enlarged Memory Photo" />
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <!-- JavaScript Script -->
+  <script src="script.js"></script>
+</body>
+
+</html>
