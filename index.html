@@ -3,17 +3,20 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Little Birthday Surprise ✨ | Happy Birthday!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Happy Birthday Shafi! 🌸🌙 | A Special Surprise</title>
   <meta name="description"
-    content="A special 3D interactive birthday surprise website filled with glowing lights, memories, music, and sweet wishes.">
+    content="A special interactive birthday surprise website for Shafi filled with glowing lights, heartfelt prayers, Quranic blessings, music, and beautiful memories.">
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Outfit, Poppins, Dancing Script, and Amiri -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Outfit:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@600;700&family=Outfit:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
     rel="stylesheet">
+
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌙</text></svg>">
 
   <!-- CSS Styles -->
   <link rel="stylesheet" href="style.css">
@@ -62,39 +65,47 @@
     <section class="screen active" id="screen-1">
       <div class="screen-content center-align">
 
-        <!-- 3D Heart Container -->
-        <div class="heart-stage" id="heart-stage">
-          <div class="glowing-3d-heart" id="glowing-heart">
-            <svg viewBox="0 0 100 100" class="heart-svg">
+        <!-- Glowing Crescent Moon & Star -->
+        <div class="crescent-stage" id="heart-stage">
+          <div class="glowing-3d-crescent" id="glowing-heart">
+            <svg viewBox="0 0 100 100" class="crescent-svg">
               <defs>
-                <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#ff416c" />
-                  <stop offset="50%" stop-color="#ff2a85" />
-                  <stop offset="100%" stop-color="#8a2387" />
+                <linearGradient id="crescentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#fff176" />
+                  <stop offset="40%" stop-color="#ffd166" />
+                  <stop offset="80%" stop-color="#f59e0b" />
+                  <stop offset="100%" stop-color="#d97706" />
                 </linearGradient>
-                <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="6" result="blur" />
+                <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ffffff" />
+                  <stop offset="100%" stop-color="#ffd166" />
+                </linearGradient>
+                <filter id="crescentNeonGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="5" result="blur" />
                   <feMerge>
                     <feMergeNode in="blur" />
                     <feMergeNode in="SourceGraphic" />
                   </feMerge>
                 </filter>
               </defs>
-              <path d="M 50,30 A 20,20 0 0,0 20,50 C 20,70 50,90 50,90 C 50,90 80,70 80,50 A 20,20 0 0,0 50,30 Z"
-                fill="url(#heartGradient)" filter="url(#neonGlow)" />
+              <path d="M 50,15 A 35,35 0 1,0 85,75 A 28,28 0 1,1 50,15 Z"
+                fill="url(#crescentGrad)" filter="url(#crescentNeonGlow)" />
+              <polygon points="68,36 71,43 78,43 73,48 75,55 68,51 61,55 63,48 58,43 65,43"
+                fill="url(#starGrad)" filter="url(#crescentNeonGlow)" />
             </svg>
-            <div class="heart-aura"></div>
+            <div class="crescent-aura"></div>
           </div>
         </div>
 
-        <h1 class="sparkle-title text-glow">A Little Birthday Surprise ✨</h1>
-        <p class="subtitle fade-in-delay">There is something special waiting for you...</p>
+        <div class="bismillah-tag">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+        <h1 class="sparkle-title text-glow">Happy Birthday Shafi! 🌸✨</h1>
+        <p class="subtitle fade-in-delay">A special prayer & celebration for my favorite person 🌙</p>
 
-        <!-- Flying Arrow Container & Button -->
+        <!-- Flying Shooting Star Container & Button -->
         <div class="arrow-trigger-wrapper">
-          <div class="flying-arrow" id="flying-arrow">🏹 ➔</div>
+          <div class="flying-arrow" id="flying-arrow">✨ ➔</div>
           <button class="btn btn-primary pulse-btn" id="start-btn">
-            <span>Tap to Unlock ✨</span>
+            <span>Tap to Begin, Shafi ✨</span>
             <div class="down-arrow-icon">↓</div>
           </button>
         </div>
@@ -105,51 +116,68 @@
     <!-- ================= SCREEN 2: BIRTHDAY SURPRISE TYPING ================= -->
     <section class="screen" id="screen-2">
       <div class="screen-content center-align">
-        <div class="glass-card surprise-box">
-          <div class="card-badge">✨ Special Day ✨</div>
+        <div class="glass-card surprise-box" id="surprise-box-card" style="cursor: pointer;">
+          <div class="card-badge">🌙 A Blessed Day for Shafi ✨</div>
+          <div class="arabic-subtext">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
           <div class="typing-container">
             <p id="typing-text" class="typing-text"></p>
             <span class="cursor">|</span>
           </div>
-          <button class="btn btn-glow mt-2" id="to-wish-btn" style="display: none;">
-            <span>Open Your Birthday Message ✨</span>
+          <p class="tap-hint" style="font-size: 0.78rem; opacity: 0.7; margin-top: 6px;">(Tap card to reveal text faster)</p>
+          <button class="btn btn-glow mt-3" id="to-wish-btn">
+            <span>Open Birthday Blessings for Shafi ✨</span>
           </button>
         </div>
       </div>
     </section>
 
-    <!-- ================= SCREEN 3: BIRTHDAY MESSAGE ================= -->
+    <!-- ================= SCREEN 3: DUAS & BIRTHDAY BLESSINGS ================= -->
     <section class="screen" id="screen-3">
       <div class="screen-content">
         <div class="glass-card wish-card">
           <div class="card-header">
+            <span class="sparkle-icon">🌙</span>
+            <h2>Duas & Wishes for Shafi</h2>
             <span class="sparkle-icon">✨</span>
-            <h2>A Little Birthday Wish</h2>
-            <span class="sparkle-icon">✨</span>
+          </div>
+
+          <!-- Arabic Calligraphy Blessing -->
+          <div class="arabic-header-banner">
+            <p class="arabic-main-text">بَارَكَ اللَّهُ فِيكِ يَا شَفِي</p>
+            <span class="arabic-translation">Barakallahu Feeki, Ya Shafi • May Allah bless you always</span>
           </div>
 
           <div class="wish-body">
-            <p class="wish-lead">To a truly special person who brings warmth and happiness to everyone around...</p>
-
-            <div class="wish-grid">
-              <div class="wish-chip">💖 Endless Happiness</div>
-              <div class="wish-chip">🌸 Beautiful Memories</div>
-              <div class="wish-chip">⭐ Great Success</div>
-              <div class="wish-chip">🕊️ Inner Peace</div>
-              <div class="wish-chip">😊 Brightest Smiles</div>
-              <div class="wish-chip">✨ Magic Moments</div>
-              <div class="wish-chip">🤗 Good Friends</div>
-              <div class="wish-chip">🎉 Wonderful Year Ahead</div>
+            <!-- Quranic Verse Card -->
+            <div class="quran-quote-card">
+              <p class="quran-quote-arabic">"فَإِنَّ مَعَ الْعُسْرِ يُسْرًا"</p>
+              <p class="quran-quote-english">"Indeed, with every hardship comes ease."</p>
+              <span class="quran-reference">— Surah Ash-Sharh (94:6)</span>
             </div>
 
+            <p class="wish-lead">To my most favorite person who brings genuine kindness, peace, and warmth into my life...</p>
+
+            <div class="wish-grid">
+              <div class="wish-chip">🌙 Noor & Divine Light</div>
+              <div class="wish-chip">🤲 Barakah & Good Health</div>
+              <div class="wish-chip">🌸 Peace of Mind (Sakina)</div>
+              <div class="wish-chip">⭐ Endless Joy & Smiles</div>
+              <div class="wish-chip">🕊️ Safety & Protection</div>
+              <div class="wish-chip">💖 My Favorite Person</div>
+              <div class="wish-chip">🌷 Grace in Every Step</div>
+              <div class="wish-chip">🎂 A Blessed Year Ahead</div>
+            </div>
+
+            <!-- Tamil Heartfelt Blessing -->
             <div class="tamil-poem-box">
-              <p class="tamil-text">இனிய பிறந்தநாள் வாழ்த்துகள்! 🌸</p>
-              <p class="tanglish-text">Un vaazhvil ellaam vaazhthum nalamum sera en manamaarntha vaazthukkal! ✨</p>
+              <p class="tamil-text">இனிய பிறந்தநாள் வாழ்த்துகள், ஷஃபி! 🌸✨</p>
+              <p class="tamil-sub">அல்லாஹ்வின் அருளும், நூர் நிறைந்த நிம்மதியும் உன் வாழ்வில் எப்போதும் நிலைத்திருக்கட்டும்!</p>
+              <p class="tanglish-text">Shafi, un vaazhvil ellaa nalamum, amaithiyum, magizhchiyum nirainthu vazhiya en manamaarntha vaazthukkal! 🌙</p>
             </div>
           </div>
 
-          <button class="btn btn-primary btn-full mt-2" id="to-favs-btn">
-            <span>Next →</span>
+          <button class="btn btn-primary btn-full mt-3" id="to-favs-btn">
+            <span>Shafi's Favourites 💫</span>
           </button>
         </div>
       </div>
@@ -159,34 +187,34 @@
     <section class="screen" id="screen-4">
       <div class="screen-content">
         <div class="section-title-wrap">
-          <h2 class="title-gradient">💫 Pick Your Favourites</h2>
-          <p class="section-sub">Select the things that bring a smile to your face!</p>
+          <h2 class="title-gradient">💫 Shafi's Favourite Things</h2>
+          <p class="section-sub">Tap the little things that bring peace and a smile to your face, Shafi!</p>
         </div>
 
         <div class="favourites-grid" id="favs-grid">
-          <div class="fav-card" data-item="Music">
-            <span class="fav-icon">🎶</span>
-            <span class="fav-label">Music</span>
+          <div class="fav-card" data-item="Night Sky">
+            <span class="fav-icon">🌙</span>
+            <span class="fav-label">Night Sky & Stars</span>
             <div class="check-mark">✓</div>
           </div>
           <div class="fav-card" data-item="Flowers">
             <span class="fav-icon">🌸</span>
-            <span class="fav-label">Flowers</span>
+            <span class="fav-label">Fresh Flowers</span>
+            <div class="check-mark">✓</div>
+          </div>
+          <div class="fav-card" data-item="Books">
+            <span class="fav-icon">📖</span>
+            <span class="fav-label">Books & Peace</span>
+            <div class="check-mark">✓</div>
+          </div>
+          <div class="fav-card" data-item="Chai & Coffee">
+            <span class="fav-icon">☕</span>
+            <span class="fav-label">Warm Chai / Coffee</span>
             <div class="check-mark">✓</div>
           </div>
           <div class="fav-card" data-item="Chocolate">
             <span class="fav-icon">🍫</span>
-            <span class="fav-label">Chocolate</span>
-            <div class="check-mark">✓</div>
-          </div>
-          <div class="fav-card" data-item="Sunsets">
-            <span class="fav-icon">🌅</span>
-            <span class="fav-label">Sunsets</span>
-            <div class="check-mark">✓</div>
-          </div>
-          <div class="fav-card" data-item="Photos">
-            <span class="fav-icon">📸</span>
-            <span class="fav-label">Photos</span>
+            <span class="fav-label">Chocolates</span>
             <div class="check-mark">✓</div>
           </div>
           <div class="fav-card" data-item="Cute Surprises">
@@ -194,40 +222,40 @@
             <span class="fav-label">Cute Surprises</span>
             <div class="check-mark">✓</div>
           </div>
-          <div class="fav-card" data-item="Movies">
-            <span class="fav-icon">🎬</span>
-            <span class="fav-label">Movies</span>
+          <div class="fav-card" data-item="Peaceful Talks">
+            <span class="fav-icon">🕊️</span>
+            <span class="fav-label">Heartfelt Talks</span>
             <div class="check-mark">✓</div>
           </div>
-          <div class="fav-card" data-item="Favourite Snacks">
-            <span class="fav-icon">☕</span>
-            <span class="fav-label">Favourite Snacks</span>
+          <div class="fav-card" data-item="Sunsets">
+            <span class="fav-icon">🌅</span>
+            <span class="fav-label">Golden Sunsets</span>
             <div class="check-mark">✓</div>
           </div>
-          <div class="fav-card" data-item="Night Sky">
-            <span class="fav-icon">🌙</span>
-            <span class="fav-label">Night Sky</span>
+          <div class="fav-card" data-item="Serene Spaces">
+            <span class="fav-icon">🕌</span>
+            <span class="fav-label">Serene Spaces</span>
             <div class="check-mark">✓</div>
           </div>
-          <div class="fav-card" data-item="Bouquet">
-            <span class="fav-icon">💐</span>
-            <span class="fav-label">Bouquet</span>
+          <div class="fav-card" data-item="Birthday Treats">
+            <span class="fav-icon">🎂</span>
+            <span class="fav-label">Birthday Treats</span>
             <div class="check-mark">✓</div>
           </div>
           <div class="fav-card" data-item="Art">
             <span class="fav-icon">🎨</span>
-            <span class="fav-label">Art</span>
+            <span class="fav-label">Art & Creativity</span>
             <div class="check-mark">✓</div>
           </div>
-          <div class="fav-card" data-item="Cute Things">
-            <span class="fav-icon">🧸</span>
-            <span class="fav-label">Cute Things</span>
+          <div class="fav-card" data-item="Good Memories">
+            <span class="fav-icon">📸</span>
+            <span class="fav-label">Good Memories</span>
             <div class="check-mark">✓</div>
           </div>
         </div>
 
         <button class="btn btn-glow btn-full mt-3" id="to-gift-btn">
-          <span>Continue 🎁</span>
+          <span>Unwrap Surprise For Shafi 🎁</span>
         </button>
       </div>
     </section>
@@ -235,8 +263,8 @@
     <!-- ================= SCREEN 5: 3D GIFT BOX SECTION ================= -->
     <section class="screen" id="screen-5">
       <div class="screen-content center-align">
-        <h2 class="title-gradient">🎁 One More Surprise...</h2>
-        <p class="section-sub">Tap the glowing gift box to unwrap your special present!</p>
+        <h2 class="title-gradient">🎁 A Special Gift For Shafi</h2>
+        <p class="section-sub">Tap the glowing present box to reveal your birthday celebration!</p>
 
         <!-- 3D Gift Box Stage -->
         <div class="gift-container" id="gift-box-trigger">
@@ -256,175 +284,92 @@
             </div>
             <!-- Burst photo container inside box -->
             <div class="emerging-photo-wrap" id="emerging-photo-wrap">
-              <img src="" id="emerging-photo" alt="Emerging Surprise Photo" />
+              <img src="assets/photos/photo1.jpg" id="emerging-photo" alt="Birthday Surprise for Shafi" />
             </div>
           </div>
 
-          <p class="tap-hint pulse-text">✨ Tap Box to Open ✨</p>
+          <p class="tap-hint pulse-text">✨ Tap Box to Open, Shafi ✨</p>
         </div>
 
-      </div>
-    </section>
-
-    <!-- ================= PHOTO STYLE 1: TOP-DOWN REVEAL ================= -->
-    <section class="screen" id="screen-6a">
-      <div class="screen-content center-align">
-        <div class="section-title-wrap">
-          <div class="spotlight"></div>
-          <h2 class="title-gradient">✨ Falling Memories</h2>
-          <p class="section-sub">Photos drifting through ambient light...</p>
-        </div>
-
-        <!-- Top-Down Falling Stage -->
-        <div class="topdown-stage" id="topdown-stage">
-          <!-- Dynamically populated falling photo cards -->
-        </div>
-
-        <button class="btn btn-primary mt-3" id="to-style2-btn">
-          <span>Next Style: 3D Perspective →</span>
+        <button class="btn btn-primary mt-3" id="direct-to-gallery-btn">
+          <span>Open Birthday Cakes & Surprises 🎂 →</span>
         </button>
+
       </div>
     </section>
 
-    <!-- ================= PHOTO STYLE 2: 3 LARGE PHOTOS (3D PERSPECTIVE) ================= -->
-    <section class="screen" id="screen-6b">
+    <!-- ================= SCREEN 6: CLEAN & BEAUTIFUL BIRTHDAY GALLERY ================= -->
+    <section class="screen" id="screen-6">
       <div class="screen-content center-align">
         <div class="section-title-wrap">
-          <h2 class="title-gradient">📸 3D Perspective View</h2>
-          <p class="section-sub">Swipe or tap Next to rotate photos</p>
+          <h2 class="title-gradient">🎂 Birthday Moments For Shafi 🎉</h2>
+          <p class="section-sub">Cakes, gifts, balloons & sweet wishes for my favorite person</p>
         </div>
 
-        <!-- 3 Large Photos Stage -->
-        <div class="perspective-stage" id="perspective-stage">
-          <div class="perspective-card photo-left" id="p-card-left">
-            <img src="" id="p-img-left" alt="Memory Left" />
+        <!-- Featured Carousel Card -->
+        <div class="featured-carousel-card glass-card">
+          <div class="featured-img-wrap" id="featured-img-wrap">
+            <img src="assets/photos/photo1.jpg" id="gallery-featured-img" alt="Birthday Cake & Wishes" />
+            <div class="featured-badge" id="gallery-badge">🎂 Delicious Birthday Cake</div>
           </div>
-          <div class="perspective-card photo-center" id="p-card-center">
-            <div class="center-glow-ring"></div>
-            <img src="" id="p-img-center" alt="Memory Center" />
-            <div class="photo-caption" id="p-caption-center">Memory</div>
-          </div>
-          <div class="perspective-card photo-right" id="p-card-right">
-            <img src="" id="p-img-right" alt="Memory Right" />
-          </div>
-        </div>
+          <p class="featured-caption" id="gallery-caption">Delicious Birthday Cake & Glowing Wishes 🎂 — Shafi</p>
 
-        <div class="gallery-controls mt-2">
-          <button class="btn btn-secondary" id="p-prev-btn">
-            <span>← Previous</span>
-          </button>
-          <button class="btn btn-secondary" id="p-next-btn">
-            <span>Next →</span>
-          </button>
-        </div>
-
-        <button class="btn btn-glow mt-3" id="to-style3-btn">
-          <span>Next Style: Card Slider →</span>
-        </button>
-      </div>
-    </section>
-
-    <!-- ================= PHOTO STYLE 3: SIDE CARD SLIDER ================= -->
-    <section class="screen" id="screen-6c">
-      <div class="screen-content center-align">
-        <div class="section-title-wrap">
-          <h2 class="title-gradient">💫 Glass Card Slider</h2>
-          <p class="section-sub">Glassmorphism card slide with neon trails</p>
-        </div>
-
-        <!-- Slider Stage -->
-        <div class="slider-stage" id="slider-stage">
-          <div class="light-flash" id="slider-light-flash"></div>
-          <div class="arrow-trail" id="slider-arrow-trail">➔</div>
-
-          <div class="slider-card glass-card" id="slider-card">
-            <div class="slider-img-wrap">
-              <img src="" id="slider-img" alt="Slider Photo" />
-              <div class="slider-reflections"></div>
+          <!-- Carousel Controls -->
+          <div class="carousel-nav-row">
+            <button class="btn btn-secondary btn-icon" id="gallery-prev-btn" aria-label="Previous Photo">❮</button>
+            <div class="carousel-dots" id="carousel-dots">
+              <span class="dot active"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
             </div>
-            <p class="slider-caption" id="slider-caption">Memory</p>
+            <button class="btn btn-secondary btn-icon" id="gallery-next-btn" aria-label="Next Photo">❯</button>
           </div>
         </div>
 
-        <div class="gallery-controls mt-2">
-          <button class="btn btn-secondary" id="slider-prev-btn">
-            <span>← Previous</span>
-          </button>
-          <button class="btn btn-secondary" id="slider-next-btn">
-            <span>NEXT →</span>
-          </button>
+        <!-- Clean Grid of All Birthday Photos -->
+        <div class="birthday-photos-grid">
+          <div class="bphoto-thumb active" data-index="0">
+            <img src="assets/photos/photo1.jpg" alt="Cake" />
+            <span class="thumb-label">🎂 Cake</span>
+          </div>
+          <div class="bphoto-thumb" data-index="1">
+            <img src="assets/photos/photo2.jpg" alt="Balloons" />
+            <span class="thumb-label">🎈 Balloons</span>
+          </div>
+          <div class="bphoto-thumb" data-index="2">
+            <img src="assets/photos/photo3.jpg" alt="Gift" />
+            <span class="thumb-label">🎁 Gift</span>
+          </div>
+          <div class="bphoto-thumb" data-index="3">
+            <img src="assets/photos/photo4.jpg" alt="Cupcake" />
+            <span class="thumb-label">🧁 Cupcake</span>
+          </div>
+          <div class="bphoto-thumb" data-index="4">
+            <img src="assets/photos/photo5.jpg" alt="Sparkles" />
+            <span class="thumb-label">🎉 Sparkles</span>
+          </div>
+          <div class="bphoto-thumb" data-index="5">
+            <img src="assets/photos/photo6.jpg" alt="Flowers" />
+            <span class="thumb-label">🌸 Flowers</span>
+          </div>
         </div>
 
-        <button class="btn btn-primary mt-3" id="to-style4-btn">
-          <span>Next Style: 3D Orbit →</span>
+        <button class="btn btn-primary btn-full mt-3" id="to-note-btn">
+          <span>A Special Note For Shafi 🌷 →</span>
         </button>
-      </div>
-    </section>
-
-    <!-- ================= PHOTO STYLE 4: 3D ORBIT CAROUSEL ================= -->
-    <section class="screen" id="screen-6d">
-      <div class="screen-content center-align">
-        <div class="section-title-wrap">
-          <h2 class="title-gradient">🪐 3D Orbit Carousel</h2>
-          <p class="section-sub">Memories revolving around the active photo</p>
-        </div>
-
-        <!-- 3D Orbit Stage -->
-        <div class="orbit-stage">
-          <div class="orbit-track" id="orbit-track">
-            <!-- Dynamically populated orbit items -->
-          </div>
-
-          <div class="orbit-center-frame" id="orbit-center-frame">
-            <div class="orbit-glow-burst"></div>
-            <img src="" id="orbit-center-img" alt="Active Orbit Photo" />
-            <p class="photo-caption" id="orbit-center-caption">Memory</p>
-          </div>
-        </div>
-
-        <div class="gallery-controls mt-2">
-          <button class="btn btn-secondary" id="orbit-prev-btn">
-            <span>← Previous</span>
-          </button>
-          <button class="btn btn-secondary" id="orbit-next-btn">
-            <span>Next →</span>
-          </button>
-        </div>
-
-        <button class="btn btn-glow mt-3" id="to-style5-btn">
-          <span>Next Style: Photo Wall →</span>
-        </button>
-      </div>
-    </section>
-
-    <!-- ================= PHOTO STYLE 5: STAGGERED PHOTO WALL ================= -->
-    <section class="screen" id="screen-6e">
-      <div class="screen-content">
-        <div class="section-title-wrap text-center">
-          <h2 class="title-gradient">📸 Beautiful Photo Wall</h2>
-          <p class="section-sub">Tap any photo to view in full screen ✨</p>
-        </div>
-
-        <!-- Staggered Grid Wall -->
-        <div class="photo-wall-grid" id="photo-wall-grid">
-          <!-- Dynamically populated grid cards -->
-        </div>
-
-        <div class="text-center mt-3">
-          <button class="btn btn-primary" id="to-note-btn">
-            <span>A Little Note For You 🌷</span>
-          </button>
-        </div>
       </div>
     </section>
 
     <!-- ================= SCREEN 7: PERSONAL NOTE ================= -->
     <section class="screen" id="screen-7">
       <div class="screen-content center-align">
-        <div class="glass-card note-card">
+        <div class="glass-card note-card" id="note-box-card" style="cursor: pointer;">
           <div class="card-header">
             <span class="sparkle-icon">🌷</span>
-            <h2>A Little Note For You</h2>
+            <h2>A Little Note For Shafi</h2>
             <span class="sparkle-icon">🌷</span>
           </div>
 
@@ -432,73 +377,109 @@
             <p id="note-typing-text" class="note-typing-text"></p>
             <span class="cursor" id="note-cursor">|</span>
           </div>
+          <p class="tap-hint" style="font-size: 0.78rem; opacity: 0.7; margin-top: 6px;">(Tap card to reveal letter faster)</p>
 
-          <button class="btn btn-glow mt-3" id="to-surprise-btn" style="display: none;">
-            <span>✨ One Tiny Surprise</span>
+          <button class="btn btn-glow mt-3" id="to-surprise-btn">
+            <span>✨ Special Duas For Shafi →</span>
           </button>
         </div>
       </div>
     </section>
 
-    <!-- ================= SCREEN 7B: TINY SURPRISE ================= -->
+    <!-- ================= SCREEN 7B: TINY SURPRISES ================= -->
     <section class="screen" id="screen-7b">
       <div class="screen-content center-align">
         <div class="section-title-wrap">
-          <h2 class="title-gradient">✨ One Tiny Surprise</h2>
-          <p class="section-sub">Tap each card to reveal a special wish!</p>
+          <h2 class="title-gradient">✨ Special Duas For Shafi</h2>
+          <p class="section-sub">Tap each card to reveal a personal prayer & blessing!</p>
         </div>
 
         <div class="tiny-surprises-grid" id="tiny-surprises-grid">
-          <div class="tiny-card glass-card" data-wish="May your days be filled with warm smiles and infinite joy! 😊">
-            <div class="tiny-icon">💫</div>
-            <h4>More Smiles</h4>
+          <div class="tiny-card glass-card" data-wish="May Allah bless your heart with lasting Sakina (peace), tranquility, and countless reasons to smile, Shafi! 🌸">
+            <div class="tiny-icon">🌙</div>
+            <h4>Dua for Peace (Sakina)</h4>
             <p class="tiny-hidden-msg">Tap to reveal ✨</p>
           </div>
 
-          <div class="tiny-card glass-card" data-wish="May every moment create a memory you treasure forever! 🌸">
-            <div class="tiny-icon">🌷</div>
-            <h4>Beautiful Memories</h4>
+          <div class="tiny-card glass-card" data-wish="May Allah shower infinite Barakah upon your health, knowledge, time, and everything you touch, Shafi! 🤲">
+            <div class="tiny-icon">🤲</div>
+            <h4>Dua for Barakah</h4>
             <p class="tiny-hidden-msg">Tap to reveal ✨</p>
           </div>
 
-          <div class="tiny-card glass-card" data-wish="May your journey ahead be blessed with happiness and peace! 🎂">
-            <div class="tiny-icon">🎂</div>
-            <h4>Happy Moments</h4>
+          <div class="tiny-card glass-card" data-wish="May every aspiration and prayer in your heart find ease, grace, and magnificent success, Shafi! ⭐">
+            <div class="tiny-icon">⭐</div>
+            <h4>Dua for Success</h4>
             <p class="tiny-hidden-msg">Tap to reveal ✨</p>
           </div>
         </div>
 
         <button class="btn btn-primary mt-3" id="to-final-btn">
-          <span>Grand Celebration 🎉</span>
+          <span>Grand Birthday Celebration For Shafi 🎉 →</span>
         </button>
       </div>
     </section>
 
-    <!-- ================= SCREEN 8: FINAL BIRTHDAY SCREEN ================= -->
+    <!-- ================= SCREEN 8: FINAL GRAND BIRTHDAY CELEBRATION ================= -->
     <section class="screen" id="screen-8">
       <div class="screen-content center-align">
 
         <div class="floating-emojis-bg" id="floating-emojis">
-          <span>🎂</span><span>💐</span><span>✨</span><span>💗</span><span>🎉</span><span>🎁</span><span>🌸</span><span>⭐</span>
+          <span>🌙</span><span>🎂</span><span>✨</span><span>🤲</span><span>🎉</span><span>🎁</span><span>🌸</span><span>⭐</span>
         </div>
 
         <div class="glass-card celebration-card">
-          <div class="birthday-cake-icon">🎂</div>
-          <h1 class="grand-title text-glow">HAPPY BIRTHDAY! 🎉</h1>
-          <h3 class="grand-subtitle">To Someone Truly Special 💗</h3>
+          <div class="birthday-cake-icon" id="finale-cake-btn" style="cursor: pointer;" title="Tap the Birthday Cake! 🎂">🎂✨</div>
+          <div class="arabic-header-banner" style="margin-bottom: 6px;">
+            <p class="arabic-main-text" style="font-size: 1.7rem;">بَارَكَ اللَّهُ فِيكِ يَا شَفِي</p>
+          </div>
+          <h1 class="grand-title text-glow">HAPPY BIRTHDAY SHAFI! 🎉</h1>
+          <h3 class="grand-subtitle">To My Most Favorite Person In The World 🌸🤍</h3>
 
-          <div class="heartfelt-message">
-            <p>Some people become special not because of how long we have known them, but because of the happiness,
-              comfort and beautiful memories they bring into our lives.</p>
-            <p>On your birthday, I simply wish that your days ahead are filled with peaceful moments, genuine smiles,
-              good people and countless reasons to be happy.</p>
-            <p class="highlight-quote">Keep shining in your own way.<br>Keep smiling.<br>And may this year bring you
-              many beautiful memories that stay close to your heart. ✨</p>
+          <!-- USER'S EXACT REQUESTED BIRTHDAY KAVITHAI & PRAYER -->
+          <div class="user-kavithai-card">
+            <div class="kavithai-header-badge">
+              <span>🌙✨ Happy Birthday, Shafi! 🎂🤍</span>
+            </div>
+            
+            <div class="kavithai-content">
+              <p class="kavithai-line">May Allah bless you with endless happiness, peace, good health and success.</p>
+              
+              <div class="kavithai-tamil-box">
+                <p class="tamil-quote">உன் அழகான கனவுகள் எல்லாம் நனவாகட்டும். உன் சிரிப்பு எப்போதும் மறையாமல் இருக்கட்டும். 🌸</p>
+              </div>
+
+              <div class="kavithai-heart-quote">
+                <p>💫 "சில மனிதர்கள் நம் வாழ்க்கையில் வருவது ஒரு அழகான gift… நீயும் அப்படிப்பட்ட ஒரு நபர்." 💫</p>
+              </div>
+
+              <p class="kavithai-line dua-line">May Allah always protect you and keep you happy. 🤲💜</p>
+
+              <div class="kavithai-final-shout">
+                <p>Once again, Happy Birthday! 🌸✨</p>
+              </div>
+            </div>
           </div>
 
-          <div class="action-buttons">
+          <!-- Secret Favorite Person Affection Touch -->
+          <div class="bestfriend-secret-box favorite-person-secret-box">
+            <p class="secret-text">
+              "சில உணர்வுகளை வார்த்தைகளில் சொல்லத் தேவையில்லை...<br>
+              நீ என் வாழ்க்கையில் கிடைத்த மிகச் சிறந்த, எப்போதும் பிடித்த நபர் (My Favorite Person)!<br>
+              எப்போதும் சிரித்துக் கொண்டே இரு, உன் சந்தோஷம்தான் எனக்கு இந்த உலகிலேயே ரொம்ப முக்கியம். 🤍✨"
+            </p>
+          </div>
+
+          <!-- Interactive Blow Candle -->
+          <div class="candle-interactive-box" id="candle-box">
+            <p class="candle-hint">🕯️ Tap the candle to blow it & make a wish, Shafi!</p>
+            <div class="candle-icon lit" id="candle-icon">🕯️</div>
+            <p class="wish-made-msg" id="wish-made-msg" style="display: none;">✨ May all your prayers and dreams come true! 🤲💖</p>
+          </div>
+
+          <div class="action-buttons mt-3">
             <button class="btn btn-primary" id="replay-btn">
-              <span>↻ Experience the Surprise Again</span>
+              <span>↻ Experience the Surprise Again, Shafi</span>
             </button>
           </div>
         </div>
@@ -512,7 +493,7 @@
   <div class="lightbox-modal" id="lightbox-modal">
     <span class="lightbox-close" id="lightbox-close">&times;</span>
     <div class="lightbox-content-wrap">
-      <img src="" id="lightbox-img" alt="Enlarged Memory Photo" />
+      <img src="" id="lightbox-img" alt="Enlarged Memory Photo for Shafi" />
       <div class="lightbox-caption" id="lightbox-caption"></div>
     </div>
   </div>
